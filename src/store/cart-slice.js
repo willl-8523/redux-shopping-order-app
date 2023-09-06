@@ -10,6 +10,7 @@ const cartSlice = createSlice({
     addItemToCart(state, action) {
       const newItem = action.payload; // payload => item when I add
       const existingItem = state.items.find((item) => item.id === newItem.id);
+      state.totalQuantity++;
 
       /**
        * newItem existing in items increase the quantity and total price
@@ -31,6 +32,7 @@ const cartSlice = createSlice({
     removeItemFromCart(state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
+      state.totalQuantity--;
 
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
